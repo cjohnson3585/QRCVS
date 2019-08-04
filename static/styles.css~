@@ -1,0 +1,9 @@
+h1 {
+    color: black;
+}
+
+a.navigation-link {
+  padding: 0px 10px;
+  word-wrap: normal;
+  display: inline-block;
+}

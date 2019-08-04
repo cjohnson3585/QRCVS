@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h4 align='center'>Hi, Welcome to QRCodeS!</h4>
+    <p align='center'>QRCodeS made simple</p>
+{% endblock %}

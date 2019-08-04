@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+
+    <div>
+      <h1>Data Input for Business Cards</h1>
+    </div>
+
+    <div>
+      <label for="name">Full Name (First, Middle Initial, Last):</label>
+      <input type="text" id="full_name" name="full_name" required size="50">
+    </div>
+
+    <div>
+      <label for="name">Occupation:</label>
+      <input type="text" id="occupation" name="occupation" required size="50">
+    </div>
+
+    <div>
+      <label for="name">Email Address:</label>
+      <input type="text" id="email_address" name="email_address" required size="50">
+    </div>
+
+    <div>
+      <label for="name">Daytime Phone Number:</label>
+      <input type="text" id="phone" name="phone" required size="50">
+    </div>
+
+    <div>
+      <label for="name">Website:</label>
+      <input type="text" id="website" name="website" required size="50">
+    </div>
+
+    <div>
+      <label for="name">Full Path to Image to be Used:</label>
+      <input type="text" id="full_path" name="full_path" required size="50">
+    </div>
+
+    <div>
+      <label for="name">Output Path:</label>
+      <input type="text" id="out_path" name="out_path" required size="50">
+    </div>
+
+    <div>
+      <label for="name">Position type (1 for bottom right, 2 for image in center):</label>
+      <input type="text" id="pos_type" name="pos_type" required size="50">
+    </div>
+
+    <div>
+       <a class="navigation-link" href="/thankyou"><button onclick="doWork()">Submit and Generate QR Code</button></a>
+    </div>
+
+</div>
+
+
+<script>
+
+function doWork() {
+  var arr = {'fn': document.getElementById("full_name").value,
+            'occ': document.getElementById("occupation").value,
+             'ea': document.getElementById("email_address").value,
+             'pn': document.getElementById("phone").value,
+            'web': document.getElementById("website").value,
+       			 'fp': document.getElementById("full_path").value,
+  		    	 'op': document.getElementById("out_path").value,
+  			     'pt': document.getElementById("pos_type").value,
+  			   };
+  $.post( "/receiver", arr, function() {
+  });
+}
+</script>
+
+
+{% endblock %}

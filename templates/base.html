@@ -1,0 +1,15 @@
+<html>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+    <head>
+      <title>Welcome to QRCodeS</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='../static/style7.css') }}" />
+    </head>
+    <body>
+        <div>QRCodeS: <a class="navigation-link" href="/generate">Generate</a><a class="navigation-link" href="/read">Read</a><a class="navigation-link" href="/database">Database</a><a class="navigation-link" href="/">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

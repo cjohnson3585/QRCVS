@@ -1,0 +1,12 @@
+<html>
+
+    <head>
+      <title>Welcome to QRCodeS</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='../static/style6.css') }}" />
+    </head>
+    <body>
+        <div>QRCodeS: <a class="navigation-link" href="/generate">Generate</a><a class="navigation-link" href="/read">Read</a><a class="navigation-link" href="/database">Database</a><a class="navigation-link" href="/">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
