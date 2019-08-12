@@ -38,8 +38,8 @@
     </div>
 
     <div>
-      <label for="name">Output Path:</label>
-      <input type="text" id="out_path" name="out_path" required size="50">
+      <label for="name">Output Path and Filename:</label>
+      <input type="text" id="out_path" name="out_path" placeholder="EXAMPLE: ./images/qr.png" size="50">
     </div>
 
     <div>
@@ -48,11 +48,13 @@
     </div>
 
     <div>
-       <a class="navigation-link" href="/thankyou"><button onclick="doWork()">Submit and Generate QR Code</button></a>
+       <button onclick="doWork();">Submit and Generate QR Code</button>
     </div>
 
 </div>
 
+<div><hr></div>
+<div>After you hit the "Submit and Genrate QR Code" button, a preview should pop up depending on your permissions. If not, check the "Output Path" direcorty.</div>
 
 <script>
 
