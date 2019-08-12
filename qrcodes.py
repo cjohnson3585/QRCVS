@@ -4,6 +4,12 @@ Main app script that calls everything
 
 from flask import Flask, render_template, request, redirect, url_for
 import json, subprocess
+import qrcode
+from PIL import Image
+import subprocess
+from functools import reduce
+import sys
+
 
 application = Flask(__name__)
 
@@ -53,7 +59,7 @@ def businesscard():
 
 @application.route('/thankyou')
 def thankyou():
-    return render_template("thankyou.html")
+    return render_template("thankyou.html", url=receiver())
 
 @application.route('/receiver', methods=['POST'])
 def receiver():
@@ -68,8 +74,8 @@ def receiver():
     pt = request.form.get('pt', default_name)
 
     imag = qrgenerator(pt, fn, fp, op, occ, ea, pn, web)
-    subprocess.call(['open', str(op)])
-    return 'Success'
+
+    return "Hello"
 
 """
 QRCode generator for business cards.
@@ -79,6 +85,7 @@ Parameters: postyp = <1 or 2>
             outpt  = <where to save the image>
 08-01-2019
 """
+
 
 def qrgenerator(postyp, fn, imag, outpt, occ, ea, pn, web):
 
@@ -136,7 +143,13 @@ def qrgenerator(postyp, fn, imag, outpt, occ, ea, pn, web):
         img_bg.paste(face, pos)
         img_bg.save(outpt)
 
+    try:
+        subprocess.call(['open', str(outpt)])
+    except:
+        pass
+        
     return img_bg
+
 
 ##---------------------------------------------------------------------------------------------------------------
 #Testing the function
