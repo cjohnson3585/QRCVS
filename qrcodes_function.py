@@ -2,80 +2,12 @@
 Main app script that calls everything
 """
 
-from flask import Flask, render_template, request, redirect, url_for
-import json, subprocess
+import subprocess
 import qrcode
 from PIL import Image
 import subprocess
-from functools import reduce
 import sys
 
-
-application = Flask(__name__)
-
-@application.route("/")
-def welcome():
-    return render_template("welcome.html")
-
-@application.route("/generate")
-def generate():
-    return render_template("generate.html")
-
-
-@application.route("/read")
-def read():
-    user = {'username': 'Jessica'}
-    posts = [
-        {
-            'author': {'username': 'Sally'},
-            'body': 'Beautiful day in Detroit!'
-        },
-        {
-            'author': {'username': 'Mark'},
-            'body': 'The Avengers movie sucked!'
-        }
-    ]
-    return render_template("index.html", title='', user=user, posts=posts)
-
-@application.route("/database")
-def database():
-    user = {'username': 'Tammy'}
-    posts = [
-        {
-            'author': {'username': 'Sally'},
-            'body': 'Beautiful day in Detroit!'
-        },
-        {
-            'author': {'username': 'Mark'},
-            'body': 'The Avengers movie sucked!'
-        }
-    ]
-    return render_template("index.html", title='', user=user, posts=posts)
-
-@application.route("/businesscard")
-def businesscard():
-    return render_template("businesscard.html")
-
-
-@application.route('/thankyou')
-def thankyou():
-    return render_template("thankyou.html", url=receiver())
-
-@application.route('/receiver', methods=['POST'])
-def receiver():
-    default_name = '0'
-    fn = request.form.get('fn', default_name)
-    occ = request.form.get('occ', default_name)
-    ea = request.form.get('ea', default_name)
-    pn = request.form.get('pn', default_name)
-    web = request.form.get('web', default_name)
-    fp = request.form.get('fp', default_name)
-    op = request.form.get('op', default_name)
-    pt = request.form.get('pt', default_name)
-
-    imag = qrgenerator(pt, fn, fp, op, occ, ea, pn, web)
-
-    return "Hello"
 
 """
 QRCode generator for business cards.
@@ -103,6 +35,7 @@ def qrgenerator(postyp, fn, imag, outpt, occ, ea, pn, web):
             }
     text = 'Name:  {0[name]} \n Occupation: {0[occupation]} \n Email: {0[email]} \n Phone: {0[phone]} \n URL: {0[url]}'.format(arr)
 
+    print(text)
     if postype not in [1,2]:
         print('ERROR: Postion type has to be either 1 (bottom right) or 2 (image at center)!')
         sys.exit()
@@ -157,15 +90,11 @@ keys = 'Y'
 if keys == 'Y':
     arr =  { 'name': 'Christopher B. Johnson',
     'occupation':'Data Scientist/Developer',
-            'url': 'https://cjohnson3585.github.io/r3/',
+            'url': 'https://github.com/cjohnson3585/',
             'email': 'cbj3585@gmail.com',
             'phone':'586-718-4381',
             'cv': 'CV.PDF'}
     text = 'Name:  {0[name]} \n Occupation: {0[occupation]} \n Url:  {0[url]} \n Email: {0[email]} \n Phone: {0[phone]} \n CV: {0[cv]}'.format(arr)
-    print(text)
 
-    qrgenerator(1, text, './images/IMG_7192.jpg', './images/qrcode.png')
-    subprocess.call(['open','./images/qrcode.png'])
-
-#if __name__ == "__main__":
-#    application.run(host="0.0.0.0", port=8000)
+    qrgenerator(2, arr['name'], './images/IMG_7192.jpeg', './images/qrcode.png',arr['occupation'],arr['email'],arr['phone'],arr['url'])
+    #subprocess.call(['open','./images/qrcode.png'])
